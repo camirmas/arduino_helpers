@@ -2,11 +2,12 @@
 This script will read serial data from an Arduino, convert
 to a float, and write to a CSV.
 """
-import serial
 import csv
-import time
 import argparse
 from signal import signal, SIGINT
+from datetime import datetime
+
+import serial
 
 
 def handler(sig_recv, _):
@@ -22,7 +23,7 @@ def run():
 
     args = parser.parse_args()
 
-    timestr = time.strftime("%Y%m%d-%H%M%S")
+    timestr = datetime.now().strftime("%Y%m%d-%H%M%S")
     output_file = "data_%s.csv" % timestr
 
     wire = serial.Serial(args.port, 9600)
@@ -34,13 +35,14 @@ def run():
 
         while True:
             strn = wire.readline()
+            timestamp = datetime.now()
 
             try:
                 value = float(strn)
 
                 print(value)
 
-                writer.writerow([value])
+                writer.writerow([timestamp, value])
             except Exception as e:
                 print(e)
 
