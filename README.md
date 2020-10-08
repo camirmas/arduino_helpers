@@ -33,12 +33,12 @@ loop()
 
 To run the script (after completing **Setup** steps 1-3):
 ```bash
-python -i arduino_helpers/serial_to_csv.py
+python arduino_helpers/serial_to_csv.py
 ```
 
 By default, the port that the script uses is `/dev/ttyACM0`. If your Arduino communicates from a different port, you can specify it:
 ```
-python -i arduino_helpers/serial_to_csv.py --port "path/to/port"
+python arduino_helpers/serial_to_csv.py --port "path/to/port"
 ```
 _Note: If you're not sure what your port is, from the Arduino IDE see Tools -> Port._
 
